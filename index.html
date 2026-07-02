@@ -1,44 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Somnia Lab - The World's Frontier Lab On Intimacy Technology</title>
-    
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      }(window.location))
-    </script>
-    <!-- End Single Page Apps for GitHub Pages -->
-    <meta name="description" content="Somnia Lab creates embodied intimacy robots that bring warmth, care, and connection into every home." />
-    <meta name="author" content="Somnia Lab" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somnia — Coming soon</title>
+<!--
+  somnia-coming-soon.html · 首页「Coming soon」磨砂盖板(单文件 · 无 JS)
+  ─ 只留:HEADER(导航)+ 移动色块 b1–b4 + 厚磨砂 blur70 + 正中「Coming soon」
+  ─ 首页 hero 已全部撤除(不再透出);盖层就是纯 teaser 观感
+  ─ 交互:所有链接去 href → 点击无任何反应;纯 CSS 动画保留
+          (色块漂移 / 导航 hover 词滚 / logo hover 自书写)
+  ─ 单屏不滚动(body overflow hidden)
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --near-white:#FDFDFD; --grey-light:#EFEFEF; --off-white:#F2F2F4;
+    --off-black:#0F1012; --pink:#FF2D78; --pink-deep:#E11D64;
+    --ink:#111114; --body:#3C3C40; --muted:#7A7A80; --faint:#ABABB0;
+    --line:#E0E0E2;
+    --ease:cubic-bezier(.22,.61,.21,1);
+    --sans:"Geist",-apple-system,"Noto Sans JP",sans-serif;
+    --pad:clamp(24px,4.7vw,120px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--near-white);color:var(--body);font-family:var(--sans);
+    font-size:14px;line-height:1.6;font-weight:400;
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+  ::selection{background:var(--pink);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .mark{display:block;color:inherit}
 
-    <meta property="og:title" content="Somnia Lab - The World's Frontier Lab On Intimacy Technology" />
-    <meta property="og:description" content="Bringing embodied intimacy and warmth into every home through advanced robotics." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+  /* ============ NAV(锐利在最上 · 链接去 href → 点击无反应 · 悬停动画保留) ============ */
+  .nav-zone{position:fixed;top:22px;left:0;right:0;z-index:100;display:flex;
+    justify-content:center;align-items:center;pointer-events:none}
+  .nav-logo{pointer-events:auto;position:fixed;top:22px;left:clamp(40px,11vw,300px);
+    height:48px;display:flex;align-items:center;cursor:pointer;
+    color:var(--ink);transition:color .4s var(--ease)}
+  .nav-logo .mark{transform-box:border-box;transform-origin:center;
+    transition:transform .12s var(--ease)}
+  .nav-logo:active .mark{transform:scale(.86)}
+  .nav-logo .mark circle{stroke-dasharray:629}
+  .nav-logo .mark line{stroke-dasharray:142}
+  .nav-logo:hover .mark circle{animation:formCircle .85s var(--ease) both}
+  .nav-logo:hover .mark line{animation:formLine .55s var(--ease) .5s both}
+  @keyframes formCircle{from{stroke-dashoffset:629}to{stroke-dashoffset:0}}
+  @keyframes formLine{from{stroke-dashoffset:142}to{stroke-dashoffset:0}}
+  .navpill{pointer-events:auto;position:relative;display:flex;align-items:center;
+    gap:clamp(26px,2.8vw,46px);height:48px}
+  .navpill > a{position:relative;display:flex;align-items:center;height:48px;
+    font-size:12.5px;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.16em;font-weight:500;
+    transition:opacity .4s var(--ease),color .4s var(--ease)}
+  .navpill:hover > a{opacity:.4}
+  .navpill > a:hover{opacity:1}
+  .roll{position:relative;display:inline-block;vertical-align:top;line-height:1.3;
+    clip-path:inset(0 -100% 0 -100%)}
+  .roll .a{display:block;white-space:nowrap;transition:transform .55s var(--ease)}
+  .roll .b{position:absolute;left:50%;top:0;white-space:nowrap;
+    transform:translate(-50%,105%);transition:transform .55s var(--ease)}
+  a:hover .roll .a{transform:translateY(-105%)}
+  a:hover .roll .b{transform:translate(-50%,0)}
+  .navpill a,.nav-logo,.burger{outline:none;-webkit-tap-highlight-color:transparent}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@SomniaLab" />
-    <meta name="twitter:image" content="/og-image.png" />
-    <script type="module" crossorigin src="/assets/main-KSMRY5xn.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-7rdDm6hK.css">
-  </head>
+  .nav-actions{pointer-events:auto;position:fixed;top:22px;right:clamp(40px,11vw,300px);
+    height:48px;display:inline-flex;align-items:center;gap:clamp(15px,1.5vw,24px);
+    color:var(--ink)}
+  .nav-ic{display:inline-flex;align-items:center;justify-content:center;color:inherit;cursor:pointer;
+    position:relative;transition:opacity .3s var(--ease)}
+  .nav-ic:hover{opacity:.55}
+  .nav-ic svg{display:block}
+  .nav-ic .badge{position:absolute;top:-5px;right:-7px;min-width:14px;height:14px;padding:0 3px;
+    border-radius:9px;background:var(--pink);color:#fff;font-size:9px;font-weight:600;line-height:14px;
+    text-align:center;letter-spacing:0}
 
-  <body>
-    <div id="root"></div>
-  </body>
+  .burger{display:none;pointer-events:auto;position:fixed;top:22px;right:clamp(28px,5vw,44px);
+    width:48px;height:48px;border-radius:50%;border:none;background:transparent;cursor:pointer;
+    align-items:center;justify-content:center;flex-direction:column;gap:5px}
+  .burger span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px}
+
+  /* ============ COMING SOON 盖层(移动色块 + 厚磨砂 · fixed 全屏) ============ */
+  .cs-cover{position:fixed;inset:0;z-index:40;overflow:hidden;isolation:isolate;
+    background:var(--near-white)}
+  .teaser-aniback{position:absolute;inset:-15%;overflow:hidden}
+  .teaser-aniback span{position:absolute;width:55vmax;height:55vmax;border-radius:50%;
+    mix-blend-mode:multiply;opacity:.6;will-change:transform}
+  .teaser-aniback .b1{background:radial-gradient(circle,#FF2D78 0%,transparent 62%);
+    left:-8%;top:2%;animation:drift1 19s ease-in-out infinite}
+  .teaser-aniback .b2{background:radial-gradient(circle,#7A4DFF 0%,transparent 62%);
+    right:-10%;top:-6%;animation:drift2 24s ease-in-out infinite}
+  .teaser-aniback .b3{background:radial-gradient(circle,#FF7A3D 0%,transparent 60%);
+    left:24%;bottom:-14%;animation:drift3 27s ease-in-out infinite}
+  .teaser-aniback .b4{background:radial-gradient(circle,#18B89E 0%,transparent 60%);
+    right:14%;bottom:-6%;animation:drift4 22s ease-in-out infinite}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(28%,18%) scale(1.18)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-22%,26%) scale(.9)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18%,-22%) scale(1.2)}}
+  @keyframes drift4{0%,100%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-20%,-16%) scale(.95)}}
+  .teaser-mosaic{position:absolute;inset:0;
+    backdrop-filter:blur(70px) saturate(125%) brightness(1.02);
+    -webkit-backdrop-filter:blur(70px) saturate(125%) brightness(1.02);
+    background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(255,255,255,.04),rgba(255,255,255,.26) 100%)}
+  .teaser-copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:2;text-align:center;padding:0 24px}
+  .teaser-copy .teaser-big{font-size:clamp(44px,7vw,128px);font-weight:300;letter-spacing:-.025em;
+    color:var(--ink);line-height:1}
+
+  @media(max-width:960px){
+    .navpill,.nav-actions{display:none}
+    .burger{display:flex}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV(header 不变 · 链接去 href → 点击无反应) ============ -->
+<div class="nav-zone">
+  <a class="nav-logo" aria-label="Somnia — home" role="img">
+    <svg class="mark" width="26" height="26" viewBox="-140 -140 280 280" fill="none"
+      stroke="currentColor" stroke-width="16" stroke-linecap="round">
+      <circle r="100"/><line x1="0" y1="0" x2="100" y2="-100"/></svg>
+  </a>
+  <nav class="navpill" aria-hidden="true">
+    <a><span class="roll"><span class="a">Love Machine</span><span class="b">Intimacy Robot</span></span></a>
+    <a><span class="roll"><span class="a">Shell Store</span><span class="b">殻ノ店</span></span></a>
+    <a><span class="roll"><span class="a">Encounters</span><span class="b">In Person</span></span></a>
+    <a><span class="roll"><span class="a">Stories</span><span class="b">Mythos</span></span></a>
+    <a><span class="roll"><span class="a">Careers</span><span class="b">Join Us</span></span></a>
+    <a><span class="roll"><span class="a">About</span><span class="b">Vision</span></span></a>
+  </nav>
+  <div class="nav-actions" aria-hidden="true">
+    <a class="nav-ic" aria-label="Cart">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 7h14l-1.2 10.2A2 2 0 0 1 15.8 19H8.2a2 2 0 0 1-2-1.8L5 7Z"/>
+        <path d="M9 7V5.5a3 3 0 0 1 6 0V7"/>
+      </svg>
+      <span class="badge">0</span>
+    </a>
+    <a class="nav-ic" aria-label="Account">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="10" r="3"/>
+        <path d="M6.5 18.3a6 6 0 0 1 11 0"/>
+      </svg>
+    </a>
+  </div>
+  <button class="burger" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
+</div>
+
+<!-- ============ COMING SOON 盖层(只留正中大字) ============ -->
+<div class="cs-cover" role="presentation">
+  <div class="teaser-aniback" aria-hidden="true">
+    <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span>
+  </div>
+  <div class="teaser-mosaic" aria-hidden="true"></div>
+  <div class="teaser-copy"><h1 class="teaser-big">Coming soon</h1></div>
+</div>
+
+</body>
 </html>
